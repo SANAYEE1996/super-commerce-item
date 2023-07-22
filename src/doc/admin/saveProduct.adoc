@@ -1,0 +1,18 @@
+= minlog API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels:2
+:sectlinks:
+
+== (관리자) 상품 업데이트 및 추가
+
+=== 요청
+
+include::{snippets}/admin/saveProduct/http-request.adoc[]
+
+=== 응답
+
+
+include::{snippets}/admin/saveProduct/response-body.adoc[]
