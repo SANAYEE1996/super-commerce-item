@@ -1,12 +1,14 @@
 package com.item.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SizeDto {
 
     private Long sizeId;
@@ -20,13 +22,4 @@ public class SizeDto {
     private String bodyName;
 
     private String sizeValue;
-
-    public SizeDto(Long sizeId, Long quantityId, String measureName, Long bodyId, String bodyName, String sizeValue) {
-        this.sizeId = sizeId;
-        this.quantityId = quantityId;
-        this.measureName = measureName;
-        this.bodyId = bodyId;
-        this.bodyName = bodyName;
-        this.sizeValue = sizeValue;
-    }
 }

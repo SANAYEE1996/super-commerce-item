@@ -1,10 +1,14 @@
 package com.item.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductImageDto {
 
     private Long productId;
@@ -16,12 +20,4 @@ public class ProductImageDto {
     private String image;
 
     private int odr;
-
-    public ProductImageDto(Long productId, Long imageId, String type, String image, int odr) {
-        this.productId = productId;
-        this.imageId = imageId;
-        this.type = type;
-        this.image = image;
-        this.odr = odr;
-    }
 }

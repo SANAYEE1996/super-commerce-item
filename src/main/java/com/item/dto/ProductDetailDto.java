@@ -1,11 +1,15 @@
 package com.item.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDetailDto {
 
     private ProductInfoDto productInfoDto;
@@ -15,11 +19,4 @@ public class ProductDetailDto {
     private List<SizeDto> sizeDtoList;
 
     private List<ProductImageDto> productImageDtoList;
-
-    public ProductDetailDto(ProductInfoDto productInfoDto, List<QuantityDto> quantityDtoList, List<SizeDto> sizeDtoList, List<ProductImageDto> productImageDtoList) {
-        this.productInfoDto = productInfoDto;
-        this.quantityDtoList = quantityDtoList;
-        this.sizeDtoList = sizeDtoList;
-        this.productImageDtoList = productImageDtoList;
-    }
 }

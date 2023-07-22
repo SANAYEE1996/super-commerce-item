@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+public class AdminService {
 
     private final ProductRepository productRepository;
 
-    public Product findProduct(String id){
-        return productRepository.findById(id).orElseThrow(()-> new RuntimeException(id+" is not exists Product"));
+    public void save(Product product){
+        productRepository.save(product);
     }
 }
