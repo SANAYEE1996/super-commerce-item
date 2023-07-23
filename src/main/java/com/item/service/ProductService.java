@@ -1,6 +1,6 @@
 package com.item.service;
 
-import com.item.ProductRepository;
+import com.item.repository.ProductRepository;
 import com.item.document.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
