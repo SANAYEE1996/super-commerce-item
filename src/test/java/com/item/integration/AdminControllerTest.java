@@ -100,4 +100,17 @@ public class AdminControllerTest {
                 .andDo(MockMvcResultHandlers.print());
 
     }
+
+    @DisplayName("상품 배치 테스트")
+    @Test
+    public void productSaveAllTest() throws Exception {
+        String content = objectMapper.writeValueAsString(null);
+
+        mockMvc.perform(post("/admin/saveAll").contentType(MediaType.APPLICATION_JSON).content(content))
+                .andDo(document("admin/saveAllProduct",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())))
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
 }

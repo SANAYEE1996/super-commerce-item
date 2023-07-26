@@ -1,4 +1,4 @@
-package com.item;
+package com.item.repository;
 
 import com.item.document.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
