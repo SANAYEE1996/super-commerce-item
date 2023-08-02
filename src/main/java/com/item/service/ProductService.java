@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -15,5 +17,13 @@ public class ProductService {
 
     public Product findProduct(String id){
         return productRepository.findById(id).orElseThrow(()-> new RuntimeException(id+" is not exists Product"));
+    }
+
+    public void saveAll(List<Product> productList){
+        productRepository.saveAll(productList);
+    }
+
+    public List<Product> findAllProduct(){
+        return productRepository.findAll();
     }
 }
