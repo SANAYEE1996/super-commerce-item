@@ -3,7 +3,9 @@ package com.item.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +30,6 @@ public class ProductInfoDto {
     private String brandName;
 
     private String brandLogoImage;
+
+
 }
