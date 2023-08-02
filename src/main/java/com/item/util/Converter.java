@@ -24,6 +24,10 @@ public class Converter {
                             productInfoDto.getProductCode(),
                             productInfoDto.getProductPrice(),
                             productInfoDto.getProductInfo(),
+                            productInfoDto.getProductThumbnail(),
+                            productInfoDto.getBrandId(),
+                            productInfoDto.getBrandName(),
+                            productInfoDto.getBrandLogoImage(),
                             toQuantityList(productDetailDto.getQuantityDtoList()),
                             toSizeList(productDetailDto.getSizeDtoList()),
                             toImageList(productDetailDto.getProductImageDtoList()));

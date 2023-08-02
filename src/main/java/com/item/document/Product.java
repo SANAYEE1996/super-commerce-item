@@ -25,6 +25,14 @@ public class Product {
 
     private String info;
 
+    private String thumbNail;
+
+    private Long brandId;
+
+    private String brandName;
+
+    private String brandLogoImage;
+
     private List<Quantity> quantityList;
 
     private List<Size> sizeList;

@@ -1,7 +1,10 @@
 package com.item.work;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.item.document.Product;
 import com.item.dto.ProductDetailDto;
+import com.item.service.ProductService;
+import com.item.util.Converter;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +27,12 @@ public class ReadTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private Converter converter;
+
+    @Autowired
+    private ProductService productService;
+
     @Test
     @DisplayName("json 파일 읽기")
     void readTest() throws Exception{
@@ -32,8 +42,14 @@ public class ReadTest {
 
         List<ProductDetailDto> dtoList = Arrays.asList(objectMapper.readValue(jsonObject.toString(), ProductDetailDto[].class));
 
+        List<Product> productList = new ArrayList<>();
+
         for (ProductDetailDto productDetailDto : dtoList){
             System.out.println(productDetailDto.getProductInfoDto().toString());
+            productList.add(converter.toProduct(productDetailDto));
         }
+
+        productService.saveAll(productList);
     }
+
 }
