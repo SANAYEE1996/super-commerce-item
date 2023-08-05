@@ -3,6 +3,7 @@ package com.item.document;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -27,6 +28,7 @@ public class Product {
 
     private String thumbNail;
 
+    @Indexed
     private Long brandId;
 
     private String brandName;
