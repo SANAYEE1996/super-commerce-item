@@ -26,4 +26,8 @@ public class ProductService {
     public List<Product> findAllBrandProduct(Long id){
         return productRepository.findAllByBrandId(id);
     }
+
+    public List<Product> searchProduct(String keyword){
+        return productRepository.findAllByNameContainsOrInfoContains(keyword);
+    }
 }

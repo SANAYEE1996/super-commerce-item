@@ -3,6 +3,7 @@ package com.item.document;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @Document("items")
 public class Product {
-
+//@CompoundIndex(name = "name_info", def = "{'info','name'}")
     @MongoId
     private String id;
 

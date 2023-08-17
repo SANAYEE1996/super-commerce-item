@@ -54,4 +54,21 @@ public class ProductRepositoryTest {
         log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
 
     }
+
+    @Test
+    @DisplayName("상품 검색 테스트")
+    void findProductBySearchKeywordTest(){
+        String keyword = "셔츠";
+
+        long startNanoTime;
+        long endNanoTime;
+        log.info("go");
+        startNanoTime = System.nanoTime();
+        List<Product> productList = productRepository.findAllByNameContainsOrInfoContains(keyword);
+        endNanoTime = System.nanoTime();
+        log.info("result size : {}", productList.size());
+        log.info("product get clear");
+        log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
+
+    }
 }
