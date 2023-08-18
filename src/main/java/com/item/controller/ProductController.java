@@ -25,4 +25,14 @@ public class ProductController {
             return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
         }
     }
+
+    @GetMapping(value = "/brand")
+    public ResponseDto getBrandProductList(@RequestParam("id") Long id){
+        try {
+            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.findAllBrandProduct(id))).build();
+        }catch (RuntimeException e){
+            log.error(e.getMessage());
+            return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
+        }
+    }
 }

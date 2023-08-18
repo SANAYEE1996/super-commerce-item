@@ -23,7 +23,11 @@ public class ProductService {
         productRepository.saveAll(productList);
     }
 
-    public List<Product> findAllProduct(){
-        return productRepository.findAll();
+    public List<Product> findAllBrandProduct(Long id){
+        return productRepository.findAllByBrandId(id);
+    }
+
+    public List<Product> searchProduct(String keyword){
+        return productRepository.findAllByNameContainsOrInfoContains(keyword, keyword);
     }
 }
