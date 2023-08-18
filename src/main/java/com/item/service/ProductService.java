@@ -28,6 +28,6 @@ public class ProductService {
     }
 
     public List<Product> searchProduct(String keyword){
-        return productRepository.findAllByNameContainsOrInfoContains(keyword);
+        return productRepository.findAllByNameContainsOrInfoContains(keyword, keyword);
     }
 }

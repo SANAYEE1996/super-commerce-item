@@ -9,5 +9,5 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     List<Product> findAllByBrandId(Long id);
 
-    List<Product> findAllByNameContainsOrInfoContains(String searchString);
+    List<Product> findAllByNameContainsOrInfoContains(String searchString, String searchString1);
 }

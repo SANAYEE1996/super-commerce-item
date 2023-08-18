@@ -14,8 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Document("items")
+@CompoundIndex(name = "name_info", def = "{'info':1,'name':1}")
 public class Product {
-//@CompoundIndex(name = "name_info", def = "{'info','name'}")
+
     @MongoId
     private String id;
 

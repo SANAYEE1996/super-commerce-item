@@ -64,11 +64,10 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findAllByNameContainsOrInfoContains(keyword);
+        List<Product> productList = productRepository.findAllByNameContainsOrInfoContains(keyword, keyword);
         endNanoTime = System.nanoTime();
         log.info("result size : {}", productList.size());
         log.info("product get clear");
         log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
-
     }
 }
