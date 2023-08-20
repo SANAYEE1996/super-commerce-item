@@ -35,4 +35,14 @@ public class ProductController {
             return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
         }
     }
+
+    @PostMapping(value = "/search")
+    public ResponseDto getSearchProductList(@RequestParam("keyword") String keyword){
+        try {
+            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.searchProduct(keyword))).build();
+        }catch (RuntimeException e){
+            log.error(e.getMessage());
+            return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
+        }
+    }
 }
