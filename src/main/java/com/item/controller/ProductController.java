@@ -27,9 +27,33 @@ public class ProductController {
     }
 
     @GetMapping(value = "/brand")
-    public ResponseDto getBrandProductList(@RequestParam("id") Long id){
+    public ResponseDto getBrandProductList(@RequestParam int page,
+                                           @RequestParam int size,
+                                           @RequestParam("id") Long id){
         try {
-            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.findAllBrandProduct(id))).build();
+            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.findAllBrandProduct(id, page, size))).build();
+        }catch (RuntimeException e){
+            log.error(e.getMessage());
+            return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
+        }
+    }
+
+    @PostMapping(value = "/search")
+    public ResponseDto getSearchProductList(@RequestParam int page,
+                                            @RequestParam int size,
+                                            @RequestParam("keyword") String keyword){
+        try {
+            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.searchProduct(keyword, page, size))).build();
+        }catch (RuntimeException e){
+            log.error(e.getMessage());
+            return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
+        }
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseDto getAllProductList(@RequestParam int page, @RequestParam int size){
+        try {
+            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.findAll(page, size))).build();
         }catch (RuntimeException e){
             log.error(e.getMessage());
             return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
