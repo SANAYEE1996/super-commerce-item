@@ -42,13 +42,15 @@ public class ProductRepositoryTest {
     @Test
     @DisplayName("brand id 로 상품 조회 테스트")
     void findProductByBrandTest(){
+        int page = 1;
+        int size = 10;
         Long brandId = 941L;
 
         long startNanoTime;
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findAllByBrandId(brandId);
+        List<Product> productList = productRepository.findByBrandIdIgnoreCase(brandId, PageRequest.of(page, size)).getContent();
         endNanoTime = System.nanoTime();
         log.info("result size : {}", productList.size());
         log.info("product get clear");
@@ -59,17 +61,23 @@ public class ProductRepositoryTest {
     @Test
     @DisplayName("상품 검색 테스트")
     void findProductBySearchKeywordTest(){
+        int page = 1;
+        int size = 10;
         String keyword = "셔츠";
 
         long startNanoTime;
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findAllByNameContainsOrInfoContains(keyword, keyword);
+        List<Product> productList = productRepository.findByNameContainingIgnoreCaseOrInfoContainingIgnoreCase(keyword, keyword, PageRequest.of(page, size)).getContent();
         endNanoTime = System.nanoTime();
         log.info("result size : {}", productList.size());
         log.info("product get clear");
         log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
+
+        for(Product product : productList){
+            System.out.println(product.getId() + " " +product.getName());
+        }
     }
 
     @Test
