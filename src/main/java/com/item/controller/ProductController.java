@@ -45,4 +45,14 @@ public class ProductController {
             return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
         }
     }
+
+    @GetMapping(value = "/all")
+    public ResponseDto getAllProductList(@RequestParam("keyword") int page, @RequestParam("keyword") int size){
+        try {
+            return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).body(new ResponseBody<>(productService.findAll(page, size))).build();
+        }catch (RuntimeException e){
+            log.error(e.getMessage());
+            return ResponseDto.builder().code(ResponseStatus.EXCEPTION.getStatusCode()).message(e.getMessage()).build();
+        }
+    }
 }

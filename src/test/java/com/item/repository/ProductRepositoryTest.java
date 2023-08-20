@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -69,5 +70,25 @@ public class ProductRepositoryTest {
         log.info("result size : {}", productList.size());
         log.info("product get clear");
         log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
+    }
+
+    @Test
+    @DisplayName("상품 페이징 테스트")
+    void pagingTest(){
+        int page = 0;
+        int size = 10;
+
+        long startNanoTime;
+        long endNanoTime;
+        log.info("go");
+        startNanoTime = System.nanoTime();
+        List<Product> productList = productRepository.findAll(PageRequest.of(page, size)).getContent();
+        endNanoTime = System.nanoTime();
+        log.info("result size : {}", productList.size());
+        log.info("product get clear");
+        log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
+        for(Product product : productList){
+            System.out.println(product.getId() + " " +product.getName());
+        }
     }
 }
