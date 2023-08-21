@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ProductRepository extends MongoRepository<Product, String> {
 
-    Page<Product> findByBrandIdIgnoreCase(Long id, Pageable pageable);
+    Page<Product> findByBrandId(Long id, Pageable pageable);
 
     Page<Product> findByNameContainingIgnoreCaseOrInfoContainingIgnoreCase(String keyword, String keyword1, Pageable pageable);
 }

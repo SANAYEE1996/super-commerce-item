@@ -25,7 +25,7 @@ public class ProductService {
     }
 
     public List<Product> findAllBrandProduct(Long id, int page, int size){
-        return productRepository.findByBrandIdIgnoreCase(id, PageRequest.of(page, size)).getContent();
+        return productRepository.findByBrandId(id, PageRequest.of(page, size)).getContent();
     }
 
     public List<Product> searchProduct(String keyword, int page, int size){

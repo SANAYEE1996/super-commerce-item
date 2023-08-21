@@ -42,7 +42,7 @@ public class ProductRepositoryTest {
     @Test
     @DisplayName("brand id 로 상품 조회 테스트")
     void findProductByBrandTest(){
-        int page = 1;
+        int page = 9;
         int size = 10;
         Long brandId = 941L;
 
@@ -50,12 +50,15 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findByBrandIdIgnoreCase(brandId, PageRequest.of(page, size)).getContent();
+        List<Product> productList = productRepository.findByBrandId(brandId, PageRequest.of(page, size)).getContent();
         endNanoTime = System.nanoTime();
         log.info("result size : {}", productList.size());
         log.info("product get clear");
         log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
 
+        for(Product product : productList){
+            System.out.println(product.getId() + " " +product.getName());
+        }
     }
 
     @Test
