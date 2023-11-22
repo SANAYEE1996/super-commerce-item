@@ -24,7 +24,8 @@ public class AdminController {
 
     @PostMapping(value = "/save")
     public ResponseDto save(@RequestBody ProductDetailDto productDetailDto){
-        adminService.save(converter.toProduct(productDetailDto));
+        //adminService.save(converter.toProduct(productDetailDto));
+        log.info("get success");
         return ResponseDto.builder().code(ResponseStatus.OK.getStatusCode()).message("등록 성공").build();
     }
 }
