@@ -15,11 +15,7 @@ public class ProductHandler {
     private final ProductService productService;
 
     public Mono<ServerResponse> getOneProduct(ServerRequest request){
-
-        String productId = request.pathVariable("id");
-
-        Product productDetailDto =  productService.findProduct(productId);
-
-        return ServerResponse.ok().bodyValue(productDetailDto).switchIfEmpty(ServerResponse.notFound().build());
+        return productService.findProduct(request.pathVariable("id"))
+                .flatMap(product -> ServerResponse.ok().bodyValue(product));
     }
 }

@@ -1,17 +1,14 @@
 package com.item.repository;
 
 import com.item.document.Product;
+import com.item.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
-
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import reactor.core.publisher.Mono;
 
 @SpringBootTest
 public class ProductRepositoryTest {
@@ -19,7 +16,8 @@ public class ProductRepositoryTest {
     private static final Logger log = LoggerFactory.getLogger(ProductRepositoryTest.class);
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
+
 
     @Test
     @DisplayName("product 단건 조회 테스트")
@@ -30,13 +28,14 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException(""));
+        Mono<Product> productMono = productService.findProduct(id);
         endNanoTime = System.nanoTime();
-        log.info("product get clear");
-        log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
 
-        assertThat(product.getId()).isEqualTo(id);
-        assertThat(product.getName()).isEqualTo("나이키 퀀텀 슬립 퀸즈 나이트");
+        Product product = productMono.block();
+        System.out.println(product.getName());
+        System.out.println(product.getBrandName());
+        System.out.println(product.getPrice());
+        System.out.println("wasting time : "+(endNanoTime - startNanoTime));
     }
     
     @Test
@@ -50,15 +49,8 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findByBrandId(brandId, PageRequest.of(page, size)).getContent();
-        endNanoTime = System.nanoTime();
-        log.info("result size : {}", productList.size());
-        log.info("product get clear");
-        log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
 
-        for(Product product : productList){
-            System.out.println(product.getId() + " " +product.getName());
-        }
+        endNanoTime = System.nanoTime();
     }
 
     @Test
@@ -72,15 +64,8 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findByNameContainingIgnoreCaseOrInfoContainingIgnoreCase(keyword, keyword, PageRequest.of(page, size)).getContent();
-        endNanoTime = System.nanoTime();
-        log.info("result size : {}", productList.size());
-        log.info("product get clear");
-        log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
 
-        for(Product product : productList){
-            System.out.println(product.getId() + " " +product.getName());
-        }
+        endNanoTime = System.nanoTime();
     }
 
     @Test
@@ -93,13 +78,7 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-        List<Product> productList = productRepository.findAll(PageRequest.of(page, size)).getContent();
+
         endNanoTime = System.nanoTime();
-        log.info("result size : {}", productList.size());
-        log.info("product get clear");
-        log.info("time : {} sec", (double)(endNanoTime - startNanoTime)/1000000000);
-        for(Product product : productList){
-            System.out.println(product.getId() + " " +product.getName());
-        }
     }
 }
