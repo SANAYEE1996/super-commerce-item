@@ -1,13 +1,7 @@
 package com.item.repository;
 
 import com.item.document.Product;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-public interface ProductRepository extends MongoRepository<Product, String> {
-
-    Page<Product> findByBrandId(Long id, Pageable pageable);
-
-    Page<Product> findByNameContainingIgnoreCaseOrInfoContainingIgnoreCase(String keyword, String keyword1, Pageable pageable);
+public interface ProductRepository extends ReactiveMongoRepository<Product, String> {
 }
