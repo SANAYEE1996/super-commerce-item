@@ -1,26 +1,35 @@
 package com.item.router;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.item.dto.SearchRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@AutoConfigureMockMvc
+@SpringBootTest
+@AutoConfigureWebTestClient
 public class ProductRouterTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private WebTestClient client;
 
-    @DisplayName("상품 디테일 가져오기")
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @DisplayName("상품 디테일 조회")
     @Test
-    public void productSaveTest() throws Exception {
-        mockMvc.perform(get("/product/detail/product_3"))
-                .andDo(MockMvcResultHandlers.print());
+    public void getProductDetailTest() throws Exception {
+        client.get().uri("/product/detail/product_3").exchange();
+    }
+
+    @DisplayName("상품 검색 테스트")
+    @Test
+    public void getProductSearchTest() throws Exception {
+        SearchRequestDto searchRequestDto = new SearchRequestDto("나이키", 0, 10);
+        String content = objectMapper.writeValueAsString(searchRequestDto);
+
     }
 }

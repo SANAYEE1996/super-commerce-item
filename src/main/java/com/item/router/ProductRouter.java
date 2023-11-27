@@ -16,6 +16,7 @@ public class ProductRouter {
     public RouterFunction<?> routeProduct(ProductHandler productHandler){
         return route()
                 .GET("/product/detail/{id}", accept(MediaType.APPLICATION_JSON), productHandler::getOneProduct)
+                .POST("/product/search", accept(MediaType.APPLICATION_JSON), productHandler::searchProduct)
                 .build();
     }
 }
