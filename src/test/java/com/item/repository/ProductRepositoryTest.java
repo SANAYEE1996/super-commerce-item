@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @SpringBootTest
 public class ProductRepositoryTest {
 
@@ -56,7 +58,7 @@ public class ProductRepositoryTest {
     @Test
     @DisplayName("상품 검색 테스트")
     void findProductBySearchKeywordTest(){
-        int page = 1;
+        int page = 2;
         int size = 10;
         String keyword = "셔츠";
 
@@ -64,8 +66,14 @@ public class ProductRepositoryTest {
         long endNanoTime;
         log.info("go");
         startNanoTime = System.nanoTime();
-
+        Mono<List<Product>> productMono = productService.searchProduct(keyword,page,size);
         endNanoTime = System.nanoTime();
+
+        List<Product> productList = productMono.block();
+        for(Product product : productList){
+            System.out.println("product name : " +product.getName());
+        }
+        System.out.println("wasting time : "+(endNanoTime - startNanoTime));
     }
 
     @Test
