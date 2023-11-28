@@ -4,6 +4,7 @@ import com.item.document.Product;
 import com.item.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -18,6 +19,14 @@ public class ProductService {
 
     public Mono<Product> findProduct(String id){
         return productRepository.findById(id);
+    }
+
+    public Mono<List<Product>> searchProduct(String keyword, int page, int size){
+        return productRepository.findByNameContainingIgnoreCaseOrInfoContainingIgnoreCase(keyword, keyword, PageRequest.of(page, size)).collectList();
+    }
+
+    public Mono<List<Product>> findAllBrandProduct(Long id, int page, int size){
+        return productRepository.findByBrandId(id, PageRequest.of(page, size)).collectList();
     }
 
 //    public void saveAll(List<Product> productList){
