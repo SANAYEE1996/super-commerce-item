@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchRequestDto {
+public class ProductRequestDto {
 
     private String keyword;
+
+    private Long brandId;
 
     private int page;
 

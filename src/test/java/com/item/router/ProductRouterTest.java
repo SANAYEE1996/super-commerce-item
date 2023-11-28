@@ -1,7 +1,7 @@
 package com.item.router;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.item.dto.SearchRequestDto;
+import com.item.dto.ProductRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class ProductRouterTest {
 
     @DisplayName("상품 디테일 조회")
     @Test
-    public void getProductDetailTest() throws Exception {
+    public void getProductDetailTest(){
 
 
     }
@@ -40,8 +40,8 @@ public class ProductRouterTest {
     @DisplayName("상품 검색 테스트")
     @Test
     public void getProductSearchTest() throws Exception {
-        SearchRequestDto searchRequestDto = new SearchRequestDto("셔츠", 0, 10);
-        String content = objectMapper.writeValueAsString(searchRequestDto);
+        ProductRequestDto productRequestDto = new ProductRequestDto("셔츠", 1L, 0, 10);
+        String content = objectMapper.writeValueAsString(productRequestDto);
 
         mockMvc.perform(post("/product/search").contentType(MediaType.APPLICATION_JSON).content(content))
                 .andExpect(status().isOk())
