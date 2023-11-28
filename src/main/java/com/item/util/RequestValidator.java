@@ -1,5 +1,6 @@
 package com.item.util;
 
+import com.item.dto.ProductRequestDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,13 @@ public class RequestValidator<T> {
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(body);
         if (!constraintViolations.isEmpty()) {
             onValidationErrors(constraintViolations);
+        }
+    }
+
+    public void brandValidate(T body){
+        if(body instanceof ProductRequestDto && ((ProductRequestDto) body).getBrandId() == null){
+            log.error("brand id must not null");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 

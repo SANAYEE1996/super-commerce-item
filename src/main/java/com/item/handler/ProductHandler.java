@@ -34,6 +34,7 @@ public class ProductHandler {
     public Mono<ServerResponse> findAllBrandProduct(ServerRequest request){
         return request.bodyToMono(ProductRequestDto.class)
                 .doOnNext(validator::validate)
+                .doOnNext(validator::brandValidate)
                 .flatMap(req -> productService.findAllBrandProduct(req.getBrandId(), req.getPage(), req.getSize()))
                 .flatMap(products -> ServerResponse.ok().bodyValue(products));
     }
