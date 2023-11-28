@@ -23,6 +23,7 @@ public class ProductHandler {
 
     public Mono<ServerResponse> searchProduct(ServerRequest request){
         return request.bodyToMono(SearchRequestDto.class)
-                .flatMap(req -> ServerResponse.ok().bodyValue(productService.searchProduct(req.getKeyword(), req.getPage(), req.getSize())));
+                .flatMap(req -> productService.searchProduct(req.getKeyword(), req.getPage(), req.getSize()))
+                .flatMap(products -> ServerResponse.ok().bodyValue(products));
     }
 }
